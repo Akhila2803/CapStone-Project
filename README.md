@@ -83,7 +83,7 @@
 -   **Frontend**: 
 		HTML, CSS, JavaScript, Angular
 -   **Backend**:
-        Java, Spring Boot, WebSocket, MongoDB
+        Java, Spring Boot, MongoDB
 
 ## **Conclusion**
 
