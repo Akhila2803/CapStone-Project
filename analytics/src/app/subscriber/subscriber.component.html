@@ -1,0 +1,39 @@
+   <div class="subscriber-list">
+    <h2>Subscribers List</h2>
+    <table class="subscriber-table">
+      <ng-container *ngFor="let subscriber of subscribers; let i = index">
+        <!-- Start a new row for every second subscriber -->
+        <tr *ngIf="i % 2 === 0">
+          <td>
+            <div class="subscriber-info">
+              <div class="subscriber-logo">
+                <div class="subscriber-initial">{{ subscriber.name.charAt(0) }}</div>
+              </div>
+              <div class="subscriber-details">
+                <div class="subscriber-name">{{ subscriber.name }}</div>
+                <div><strong>Phone Number:</strong> {{ subscriber.phoneNumber }}</div>
+                <div><strong>Email:</strong> {{ subscriber.email }}</div>
+                <div><strong>Plan Type:</strong> {{ subscriber.planType }}</div>
+              </div>
+            </div>
+          </td>
+          <td *ngIf="subscribers[i + 1]">
+            <div class="subscriber-info">
+              <div class="subscriber-logo">
+                <div class="subscriber-initial">{{ subscribers[i + 1].name.charAt(0) }}</div>
+              </div>
+              <div class="subscriber-details">
+                <div class="subscriber-name">{{ subscribers[i + 1].name }}</div>
+                <div><strong>Phone Number:</strong> {{ subscribers[i + 1].phoneNumber }}</div>
+                <div><strong>Email:</strong> {{ subscribers[i + 1].email }}</div>
+                <div><strong>Plan Type:</strong> {{ subscribers[i + 1].planType }}</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+  
+  
+  

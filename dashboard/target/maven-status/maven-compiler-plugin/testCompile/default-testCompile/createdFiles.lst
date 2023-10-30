@@ -1,0 +1,15 @@
+com/example/dashboard/DashBoardControllerIntegrationTest.class
+com/example/dashboard/SubscriberTests.class
+com/example/dashboard/CallCountResultTest.class
+com/example/dashboard/DashBoardControllerTests.class
+com/example/dashboard/SubscriberServiceTests.class
+com/example/dashboard/CallHistoryAverageDurationCalculatorTest.class
+com/example/dashboard/CallHistoryTests.class
+com/example/dashboard/DataUsageTest.class
+com/example/dashboard/PlanServiceTest.class
+com/example/dashboard/DashboardApplicationTests.class
+com/example/dashboard/TextServiceTest.class
+com/example/dashboard/TextTest.class
+com/example/dashboard/CallHistoryServiceTest.class
+com/example/dashboard/DataUsageServiceTest.class
+com/example/dashboard/PlanTest.class

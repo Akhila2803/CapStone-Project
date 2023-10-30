@@ -1,0 +1,20 @@
+
+.data-box-container {
+    display: flex;
+}
+
+.consumed-data-box,
+.consumed-data-box1,
+.consumed-data-box2,
+.consumed-data-box3,
+.consumed-data-box4 {
+    border: 2px solid #0f0f0f;
+    height: auto;
+    padding: 10px;
+    width: 250px;
+    text-align: center;
+    background-color:darkcyan;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-right: 20px; 
+    border-radius: 15px;
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TextService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dashboard</a> &gt; <a href="index.source.html" class="el_package">com.example.dashboard.servcie</a> &gt; <span class="el_source">TextService.java</span></div><h1>TextService.java</h1><pre class="source lang-java linenums">package com.example.dashboard.servcie;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+import com.example.dashboard.entities.Text;
+import com.example.dashboard.repository.TextRepository;
+
+@Service
+<span class="fc" id="L17">public class TextService{</span>
+    @Autowired
+    private TextRepository textRepository;
+
+    public List&lt;Text&gt; getTextsByPhoneNumber(String phoneNumber) {
+<span class="fc" id="L22">        return textRepository.findByPhoneNumber(phoneNumber);</span>
+    }
+
+    public Text createText(Text text) {
+<span class="fc" id="L26">        return textRepository.save(text);</span>
+    }
+    public List&lt;Text&gt; getAllTexts() {
+<span class="fc" id="L29">        return textRepository.findAll();</span>
+    }
+<span class="fc" id="L31">    private SimpleDateFormat timeFormat = new SimpleDateFormat(&quot;HH:mm&quot;);</span>
+    public Map&lt;String, Integer&gt; countTextsInOneHourIntervals() {
+<span class="nc" id="L33">        Map&lt;String, Integer&gt; intervalCounts = new LinkedHashMap&lt;&gt;();</span>
+
+        try {
+<span class="nc" id="L36">            Date intervalStart = timeFormat.parse(&quot;00:00&quot;);</span>
+<span class="nc" id="L37">            Date intervalEnd = timeFormat.parse(&quot;01:00&quot;);</span>
+
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            for (int hour = 0; hour &lt; 24; hour++) {</span>
+<span class="nc" id="L40">                int textCount = countTextsInInterval(intervalStart, intervalEnd);</span>
+<span class="nc" id="L41">                String intervalKey = timeFormat.format(intervalStart) + &quot; to &quot; + timeFormat.format(intervalEnd);</span>
+<span class="nc" id="L42">                intervalCounts.put(intervalKey, textCount);</span>
+
+<span class="nc" id="L44">                intervalStart.setTime(intervalStart.getTime() + 3600000); // Add 1 hour in milliseconds</span>
+<span class="nc" id="L45">                intervalEnd.setTime(intervalEnd.getTime() + 3600000);</span>
+            }
+<span class="nc" id="L47">        } catch (ParseException e) {</span>
+<span class="nc" id="L48">            e.printStackTrace();</span>
+<span class="nc" id="L49">        }</span>
+
+<span class="nc" id="L51">        return intervalCounts;</span>
+    }
+
+    public int countTextsInInterval(Date start, Date end) {
+<span class="fc" id="L55">        List&lt;Text&gt; textList = textRepository.findAll();</span>
+<span class="fc" id="L56">        int textCount = 0;</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for (Text text : textList) {</span>
+            try {
+<span class="fc" id="L59">                Date textTime = timeFormat.parse(text.getTime());</span>
+<span class="pc bpc" id="L60" title="2 of 4 branches missed.">                if (textTime.after(start) &amp;&amp; textTime.before(end)) {</span>
+<span class="fc" id="L61">                    textCount++;</span>
+                }
+<span class="nc" id="L63">            } catch (ParseException e) {</span>
+<span class="nc" id="L64">                e.printStackTrace();</span>
+<span class="fc" id="L65">            }</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">        return textCount;</span>
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

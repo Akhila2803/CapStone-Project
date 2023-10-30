@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DashBoardController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dashboard</a> &gt; <a href="index.source.html" class="el_package">com.example.dashboard.controller</a> &gt; <span class="el_source">DashBoardController.java</span></div><h1>DashBoardController.java</h1><pre class="source lang-java linenums">package com.example.dashboard.controller;
+import com.example.dashboard.entities.CallHistory;
+import com.example.dashboard.entities.DataUsage;
+import com.example.dashboard.entities.Plan;
+import com.example.dashboard.entities.Subscriber;
+import com.example.dashboard.entities.Text;
+import com.example.dashboard.entities.Subscriber.Location;
+import com.example.dashboard.entities.Subscriber.PlanType;
+import com.example.dashboard.servcie.CallHistoryService;
+import com.example.dashboard.servcie.DataUsageService;
+import com.example.dashboard.servcie.PlanService;
+import com.example.dashboard.servcie.SubscriberService;
+import com.example.dashboard.servcie.TextService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@CrossOrigin
+@RequestMapping(&quot;/api&quot;)
+public class DashBoardController {
+    private final PlanService planService;
+    private final SubscriberService subscriberService;
+    private final CallHistoryService callHistoryService;
+    private final TextService textService;
+    private final DataUsageService dataUsageService;
+    @Autowired
+<span class="fc" id="L30">    public DashBoardController(PlanService planService,SubscriberService subscriberService, CallHistoryService callHistoryService, TextService textService, DataUsageService dataUsageService) {</span>
+<span class="fc" id="L31">        this.planService = planService;</span>
+<span class="fc" id="L32">        this.subscriberService = subscriberService;</span>
+<span class="fc" id="L33">        this.callHistoryService=callHistoryService;</span>
+<span class="fc" id="L34">        this.textService=textService;</span>
+<span class="fc" id="L35">        this.dataUsageService = dataUsageService;</span>
+<span class="fc" id="L36">    }</span>
+     
+    @GetMapping(&quot;/plans&quot;)
+    public List&lt;Plan&gt; getAllPlans() {
+<span class="fc" id="L40">        return planService.getAllPlans();</span>
+    }
+    @GetMapping(&quot;/plans/{planType}&quot;)
+    public List&lt;Plan&gt; getPlansByType(@PathVariable PlanType planType){
+<span class="fc" id="L44">        return planService.getPlansByType(planType);</span>
+    }
+    @GetMapping(&quot;/all&quot;)
+    public List&lt;Subscriber&gt; getAllSubscribers() {
+<span class="fc" id="L48">        return subscriberService.getAllSubscribers();</span>
+    }
+    @PostMapping(&quot;/add&quot;)
+    public Plan addPlan(@RequestBody Plan plan) {
+<span class="fc" id="L52">        return planService.addPlan(plan);</span>
+    }
+
+    @GetMapping(&quot;/revenue&quot;)
+    public double getTotalRevenue() {
+<span class="fc" id="L57">        return subscriberService.getTotalRevenue();</span>
+    }
+    @GetMapping(&quot;/total&quot;)
+    public long getTotalSubscribers() {
+<span class="fc" id="L61">        return subscriberService.getTotalSubscribers(); </span>
+    }
+    @GetMapping(&quot;/prepaid/TOTAL&quot;)
+    public long getPrepaidSubscribers() {
+<span class="fc" id="L65">        return subscriberService.getPrepaidSubscribers();</span>
+    }
+    @GetMapping(&quot;/postpaid/TOTAL&quot;)
+    public long getPostpaidSubscribers() {
+<span class="fc" id="L69">        return subscriberService.getPostpaidSubscribers();</span>
+    }
+    @GetMapping(&quot;/count&quot;)
+    public long getSubscriberCount() {
+<span class="fc" id="L73">        return subscriberService.getTotalSubscribers();</span>
+    }
+    @GetMapping(&quot;/count/{location}&quot;)
+    public long getSubscriberCountByLocation(@PathVariable Location location) {
+<span class="nc" id="L77">        return subscriberService.getSubscriberCountByLocation(location);</span>
+    }
+    
+    @GetMapping(&quot;/prepaid/{location}&quot;)
+    public long countPrepaidSubscribersByLocation(@PathVariable(&quot;location&quot;) Subscriber.Location location) {
+<span class="fc" id="L82">        return subscriberService.countPrepaidSubscribersByLocation(location);</span>
+    }
+
+    @GetMapping(&quot;/postpaid/{location}&quot;)
+    public long countPostpaidSubscribersByLocation(@PathVariable(&quot;location&quot;) Subscriber.Location location) {
+<span class="fc" id="L87">        return subscriberService.countPostpaidSubscribersByLocation(location);</span>
+    }
+    @GetMapping(&quot;total/prepaid/TOTAL&quot;)
+    public double getPrepaidRevenue() {
+<span class="fc" id="L91">        return subscriberService.calculatePrepaidRevenue();</span>
+    }
+
+    @GetMapping(&quot;total/postpaid/TOTAL&quot;)
+    public double getPostpaidRevenue() {
+<span class="fc" id="L96">        return subscriberService.calculatePostpaidRevenue();</span>
+    }
+    @GetMapping(&quot;/total/postpaid/{location}&quot;)
+    public double getPostpaidRevenueForLocation(@PathVariable Subscriber.Location location) {
+<span class="fc" id="L100">        return subscriberService.getPostpaidRevenueForLocation(location);</span>
+    }
+    @GetMapping(&quot;/total/prepaid/{location}&quot;)
+    public double getPrepaidRevenueForLocation(@PathVariable Subscriber.Location location) {
+<span class="fc" id="L104">        return subscriberService.getPrepaidRevenueForLocation(location);</span>
+    }
+    @GetMapping(&quot;/total/{location}&quot;)
+    public double getTotalRevenueForLocation(@PathVariable Subscriber.Location location) {
+<span class="fc" id="L108">        return subscriberService.getTotalRevenueForLocation(location);</span>
+    }
+
+    @GetMapping(&quot;/calls&quot;)
+    public List&lt;CallHistory&gt; getAllCallHistories() {
+<span class="fc" id="L113">        return callHistoryService.getAllCallHistories();</span>
+    }
+    @PostMapping(&quot;/add/call&quot;)
+    public CallHistory createCallHistory( @RequestBody CallHistory callHistory) {
+<span class="fc" id="L117">        return callHistoryService.createCallHistory(callHistory);</span>
+    } 
+
+    @PostMapping(&quot;/add/text&quot;)
+    public Text createText(@RequestBody Text text) {
+<span class="fc" id="L122">        return textService.createText(text);</span>
+    }
+    @GetMapping(&quot;/text&quot;)
+    public List&lt;Text&gt; getAllTexts() {
+<span class="fc" id="L126">        return textService.getAllTexts();</span>
+    }
+    @PostMapping(&quot;/add/data&quot;)
+    public DataUsage createDataUsage(@RequestBody DataUsage dataUsage) {
+<span class="fc" id="L130">        return dataUsageService.createDataUsage(dataUsage);</span>
+    }
+    @PostMapping(&quot;/add/sub&quot;)
+    public Subscriber createSubscriber(@RequestBody Subscriber subscriber) {
+<span class="fc" id="L134">        return subscriberService.createSubscriber(subscriber);</span>
+    }
+    
+    @GetMapping(&quot;/data&quot;)
+    public List&lt;DataUsage&gt; getAllDataUsages() {
+<span class="fc" id="L139">        return dataUsageService.getAllDataUsages();</span>
+    }
+    @GetMapping(&quot;calls/{phoneNumber}&quot;)
+    public List&lt;CallHistory&gt; getCallHistoryByPhoneNumber(@PathVariable String phoneNumber) {
+<span class="fc" id="L143">        return callHistoryService.getCallHistoryByPhoneNumber(phoneNumber);</span>
+    }
+     @GetMapping(&quot;text/{phoneNumber}&quot;)
+    public List&lt;Text&gt; getTextsByPhoneNumber(@PathVariable String phoneNumber) {
+<span class="fc" id="L147">        return textService.getTextsByPhoneNumber(phoneNumber);</span>
+    }
+    @GetMapping(&quot;data/{phoneNumber}&quot;)
+    public List&lt;DataUsage&gt; getDataUsageByPhoneNumber(@PathVariable String phoneNumber) {
+<span class="fc" id="L151">        return dataUsageService.getDataUsageByPhoneNumber(phoneNumber);</span>
+    }
+
+    @GetMapping(&quot;/total-consumed-data&quot;)
+    public double getTotalConsumedData() {
+<span class="fc" id="L156">        return dataUsageService.getTotalConsumedData();</span>
+    }
+   
+
+    @GetMapping(&quot;/countByPlanName&quot;)
+    public Map&lt;String, Long&gt; countSubscribersByPlanName() {
+<span class="fc" id="L162">        return subscriberService.countSubscribersByPlanName();</span>
+    }
+    @GetMapping(&quot;/withdurations&quot;)
+    public List&lt;CallHistory&gt; getCallHistoryWithDurations() {
+<span class="fc" id="L166">        return callHistoryService.getCallHistoryWithDurations();</span>
+    }
+    @GetMapping(&quot;/count-calls-in-intervals&quot;)
+    public Map&lt;String, Integer&gt; countCallsInIntervals() {
+<span class="fc" id="L170">        Map&lt;String, Integer&gt; intervalCounts = callHistoryService.countCallsInOneHourIntervals();</span>
+<span class="fc" id="L171">        return intervalCounts;</span>
+    }
+
+    @GetMapping(&quot;/count-texts-in-intervals&quot;)
+    public Map&lt;String, Integer&gt; countTextsInIntervals() {
+<span class="fc" id="L176">        return textService.countTextsInOneHourIntervals();</span>
+    }
+    @GetMapping(&quot;/average-call-duration&quot;)
+    public double getAverageCallDuration() {
+<span class="fc" id="L180">        List&lt;CallHistory&gt; callHistoryList = callHistoryService.getAllCallHistories(); // Implement this method in your service</span>
+<span class="fc" id="L181">        double averageDuration = CallHistoryAverageDurationCalculator.calculateAverageCallDuration(callHistoryList); // Use your calculation method</span>
+<span class="fc" id="L182">        return Math.round(averageDuration);</span>
+    }
+    @GetMapping(&quot;/count/{phoneNumber}&quot;)
+    public long getCallHistoryCountByPhoneNumber(@PathVariable String phoneNumber) {
+<span class="nc" id="L186">        return callHistoryService.getCallHistoryCountByPhoneNumber(phoneNumber);</span>
+    }
+    
+
+    
+
+}
+
+
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

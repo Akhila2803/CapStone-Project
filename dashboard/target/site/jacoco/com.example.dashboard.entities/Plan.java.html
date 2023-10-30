@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Plan.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dashboard</a> &gt; <a href="index.source.html" class="el_package">com.example.dashboard.entities</a> &gt; <span class="el_source">Plan.java</span></div><h1>Plan.java</h1><pre class="source lang-java linenums">package com.example.dashboard.entities;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.example.dashboard.entities.Subscriber.PlanType;
+@Document(collection = &quot;plans&quot;)
+<span class="fc" id="L8">public class Plan {</span>
+    @Id
+    private String id;
+    private String name;
+    private PlanType planType; 
+    private String dataLimit;
+    private String totalData;
+    private String voiceLimit;
+    private String smsLimit;
+    private String validity;
+    
+    public String getValidity() {
+<span class="fc" id="L20">        return validity;</span>
+    }
+    public void setValidity(String validity) {
+<span class="fc" id="L23">        this.validity = validity;</span>
+<span class="fc" id="L24">    }</span>
+    private double price;
+
+    public String getId() {
+<span class="fc" id="L28">        return id;</span>
+    }
+    public void setId(String id) {
+<span class="fc" id="L31">        this.id = id;</span>
+<span class="fc" id="L32">    }</span>
+    public String getName() {
+<span class="fc" id="L34">        return name;</span>
+    }
+    public void setName(String name) {
+<span class="fc" id="L37">        this.name = name;</span>
+<span class="fc" id="L38">    }</span>
+    public PlanType getPlanType() {
+<span class="fc" id="L40">        return planType;</span>
+    }
+    public void setPlanType(PlanType planType) {
+<span class="fc" id="L43">        this.planType = planType;</span>
+<span class="fc" id="L44">    }</span>
+    public String getDataLimit() {
+<span class="fc" id="L46">        return dataLimit;</span>
+    }
+    public void setDataLimit(String dataLimit) {
+<span class="fc" id="L49">        this.dataLimit = dataLimit;</span>
+<span class="fc" id="L50">    }</span>
+    public String getTotalData() {
+<span class="fc" id="L52">        return totalData;</span>
+    }
+    public void setTotalData(String totalData) {
+<span class="fc" id="L55">        this.totalData = totalData;</span>
+<span class="fc" id="L56">    }</span>
+    public String getVoiceLimit() {
+<span class="fc" id="L58">        return voiceLimit;</span>
+    }
+    public void setVoiceLimit(String voiceLimit) {
+<span class="fc" id="L61">        this.voiceLimit = voiceLimit;</span>
+<span class="fc" id="L62">    }</span>
+    public String getSmsLimit() {
+<span class="fc" id="L64">        return smsLimit;</span>
+    }
+    public void setSmsLimit(String smsLimit) {
+<span class="fc" id="L67">        this.smsLimit = smsLimit;</span>
+<span class="fc" id="L68">    }</span>
+    
+    public double getPrice() {
+<span class="fc" id="L71">        return price;</span>
+    }
+    public void setPrice(double price) {
+<span class="fc" id="L74">        this.price = price;</span>
+<span class="fc" id="L75">    }</span>
+   
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
