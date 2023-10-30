@@ -1,0 +1,1068 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "paths": {
+        "/api/add": {
+            "post": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "addPlan",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Plan"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Plan"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/add/text": {
+            "post": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "createText",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Text"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Text"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/add/sub": {
+            "post": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "createSubscriber",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Subscriber"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Subscriber"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/add/data": {
+            "post": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "createDataUsage",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DataUsage"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DataUsage"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/add/call": {
+            "post": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "createCallHistory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CallHistory"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CallHistory"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/withdurations": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getCallHistoryWithDurations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallHistory"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getTotalSubscribers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getTotalRevenueForLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total/prepaid/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPrepaidRevenueForLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total/prepaid/TOTAL": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPrepaidRevenue",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total/postpaid/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPostpaidRevenueForLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total/postpaid/TOTAL": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPostpaidRevenue",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/total-consumed-data": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getTotalConsumedData",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAllTexts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Text"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/text/{phoneNumber}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getTextsByPhoneNumber",
+                "parameters": [
+                    {
+                        "name": "phoneNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Text"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/revenue": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getTotalRevenue",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/prepaid/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "countPrepaidSubscribersByLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/prepaid/TOTAL": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPrepaidSubscribers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/postpaid/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "countPostpaidSubscribersByLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/postpaid/TOTAL": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPostpaidSubscribers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/plans": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAllPlans",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Plan"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/plans/{planType}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getPlansByType",
+                "parameters": [
+                    {
+                        "name": "planType",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "PREPAID",
+                                "POSTPAID"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Plan"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/data": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAllDataUsages",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DataUsage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/data/{phoneNumber}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getDataUsageByPhoneNumber",
+                "parameters": [
+                    {
+                        "name": "phoneNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DataUsage"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/count": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getSubscriberCount",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/countByPlanName": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "countSubscribersByPlanName",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "integer",
+                                        "format": "int64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/count/{location}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getSubscriberCountByLocation",
+                "parameters": [
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "HYDERABAD",
+                                "BENGALURU",
+                                "CHENNAI",
+                                "MUMBAI"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/count-texts-in-intervals": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "countTextsInIntervals",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "integer",
+                                        "format": "int32"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/count-calls-in-intervals": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "countCallsInIntervals",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "integer",
+                                        "format": "int32"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/calls": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAllCallHistories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallHistory"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/calls/{phoneNumber}": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getCallHistoryByPhoneNumber",
+                "parameters": [
+                    {
+                        "name": "phoneNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CallHistory"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/average-call-duration": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAverageCallDuration",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/all": {
+            "get": {
+                "tags": [
+                    "dash-board-controller"
+                ],
+                "operationId": "getAllSubscribers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Subscriber"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Plan": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "planType": {
+                        "type": "string",
+                        "enum": [
+                            "PREPAID",
+                            "POSTPAID"
+                        ]
+                    },
+                    "dataLimit": {
+                        "type": "string"
+                    },
+                    "totalData": {
+                        "type": "string"
+                    },
+                    "voiceLimit": {
+                        "type": "string"
+                    },
+                    "smsLimit": {
+                        "type": "string"
+                    },
+                    "validity": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                }
+            },
+            "Text": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Subscriber": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "planType": {
+                        "type": "string",
+                        "enum": [
+                            "PREPAID",
+                            "POSTPAID"
+                        ]
+                    },
+                    "location": {
+                        "type": "string",
+                        "enum": [
+                            "HYDERABAD",
+                            "BENGALURU",
+                            "CHENNAI",
+                            "MUMBAI"
+                        ]
+                    },
+                    "plan": {
+                        "$ref": "#/components/schemas/Plan"
+                    }
+                }
+            },
+            "DataUsage": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "dataPerDay": {
+                        "type": "string"
+                    },
+                    "consumedData": {
+                        "type": "string"
+                    },
+                    "leftData": {
+                        "type": "string"
+                    }
+                }
+            },
+            "CallHistory": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "phoneNumber": {
+                        "type": "string"
+                    },
+                    "startTime": {
+                        "type": "string"
+                    },
+                    "endTime": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string"
+                    },
+                    "callDuration": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
