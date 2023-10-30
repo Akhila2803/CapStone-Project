@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataUsageService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dashboard</a> &gt; <a href="index.source.html" class="el_package">com.example.dashboard.servcie</a> &gt; <span class="el_source">DataUsageService.java</span></div><h1>DataUsageService.java</h1><pre class="source lang-java linenums">package com.example.dashboard.servcie;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.dashboard.entities.DataUsage;
+import com.example.dashboard.repository.DataUsageRepository;
+@Service
+public class DataUsageService {
+    private final DataUsageRepository dataUsageRepository;
+
+    @Autowired
+<span class="fc" id="L14">    public DataUsageService(DataUsageRepository dataUsageRepository) {</span>
+<span class="fc" id="L15">        this.dataUsageRepository = dataUsageRepository;</span>
+<span class="fc" id="L16">    }</span>
+    public DataUsage createDataUsage(DataUsage dataUsage) {
+<span class="fc" id="L18">        return dataUsageRepository.save(dataUsage);</span>
+    }
+    public List&lt;DataUsage&gt; getDataUsageByPhoneNumber(String phoneNumber) {
+<span class="fc" id="L21">        return dataUsageRepository.findByPhoneNumber(phoneNumber);</span>
+    }
+    public List&lt;DataUsage&gt; getAllDataUsages() {
+<span class="fc" id="L24">        return dataUsageRepository.findAll();</span>
+    }
+    public double getTotalConsumedData() {
+<span class="fc" id="L27">        List&lt;DataUsage&gt; allDataUsages = dataUsageRepository.findAll();</span>
+<span class="fc" id="L28">        double totalConsumedData = 0.0;</span>
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (DataUsage dataUsage : allDataUsages) {</span>
+            try {
+<span class="fc" id="L32">                double consumedData = Double.parseDouble(dataUsage.getConsumedData());</span>
+<span class="fc" id="L33">                totalConsumedData += consumedData;</span>
+<span class="fc" id="L34">            } catch (NumberFormatException e) {</span>
+                // Handle invalid data if needed
+<span class="fc" id="L36">            }</span>
+<span class="fc" id="L37">        }</span>
+
+<span class="fc" id="L39">        return totalConsumedData;</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
